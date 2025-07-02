@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (page === 'terms') {
                 const placeholder = document.getElementById('termly-content-placeholder');
                 if (placeholder) {
-                    fetch('pages/_terms-content.html')
+                    fetch('pages/terms-content.html') // <<< FIXED
                         .then(res => res.text())
                         .then(html => {
                             placeholder.innerHTML = html;
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (page === 'cookies') {
                 const placeholder = document.getElementById('cookie-content-placeholder');
                 if (placeholder) {
-                    fetch('pages/_cookie-content.html')
+                    fetch('pages/cookie-content.html') // <<< FIXED
                         .then(res => res.text())
                         .then(html => {
                             placeholder.innerHTML = html;
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (page === 'privacy') {
                 const placeholder = document.getElementById('privacy-content-placeholder');
                 if (placeholder) {
-                    fetch('pages/_privacy-content.html')
+                    fetch('pages/privacy-content.html') // <<< FIXED
                         .then(res => res.text())
                         .then(html => {
                             placeholder.innerHTML = html;
