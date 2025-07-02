@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (page === 'terms') {
                 const placeholder = document.getElementById('termly-content-placeholder');
                 if (placeholder) {
-                    fetch('pages/terms-content.html')
+                    fetch('pages/_terms-content.html')
                         .then(res => res.text())
                         .then(html => {
                             placeholder.innerHTML = html;
