@@ -118,30 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             // --- END OF NEW CODE BLOCK ---
-                        // --- NEW CODE BLOCK TO INJECT TERMLY CONTENT ---
-            if (page === 'cookies') {
-                const placeholder = document.getElementById('cookie-content-placeholder');
-                if (placeholder) {
-                    fetch('pages/_cookie-content.html')
-                        .then(res => res.text())
-                        .then(html => {
-                            placeholder.innerHTML = html;
-                        });
-                }
-            }
-            // --- END OF NEW CODE BLOCK ---
-                        // --- NEW CODE BLOCK TO INJECT TERMLY CONTENT ---
-            if (page === 'privacy') {
-                const placeholder = document.getElementById('privacy-content-placeholder');
-                if (placeholder) {
-                    fetch('pages/_privacy-content.html')
-                        .then(res => res.text())
-                        .then(html => {
-                            placeholder.innerHTML = html;
-                        });
-                }
-            }
-            // --- END OF NEW CODE BLOCK ---
 
             if (pageMetas[page]) {
                 document.title = pageMetas[page].title;
