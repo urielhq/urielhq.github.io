@@ -106,9 +106,9 @@ document.addEventListener('DOMContentLoaded', function() {
             mainContent.innerHTML = content;
             window.scrollTo(0, 0);
 
-            // --- NEW CODE BLOCK TO INJECT TERMLY CONTENT ---
+            // --- NEW CODE BLOCK TO INJECT TERMS CONTENT ---
             if (page === 'terms') {
-                const placeholder = document.getElementById('termly-content-placeholder');
+                const placeholder = document.getElementById('terms-content-placeholder');
                 if (placeholder) {
                     fetch('pages/terms-content.html') // <<< FIXED
                         .then(res => res.text())
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             // --- END OF NEW CODE BLOCK ---
-                        // --- NEW CODE BLOCK TO INJECT TERMLY CONTENT ---
+                        // --- NEW CODE BLOCK TO INJECT COOKIE CONTENT ---
             if (page === 'cookies') {
                 const placeholder = document.getElementById('cookie-content-placeholder');
                 if (placeholder) {
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             // --- END OF NEW CODE BLOCK ---
-                        // --- NEW CODE BLOCK TO INJECT TERMLY CONTENT ---
+                        // --- NEW CODE BLOCK TO INJECT PRIVACY CONTENT ---
             if (page === 'privacy') {
                 const placeholder = document.getElementById('privacy-content-placeholder');
                 if (placeholder) {
