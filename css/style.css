@@ -28,6 +28,18 @@ body {
     background-color: var(--white);
 }
 
+/* --- Bullet List Formatting Fix --- */
+ul, ol {
+  margin-left: 2rem;
+  padding-left: 1rem;
+  list-style-type: disc;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+
 .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -443,44 +455,3 @@ footer .footer-col p a {
     }
 }
 
-/* ================================================= */
-/* --- Termly Policy Overrides --- */
-/* ================================================= */
-
-/* UPDATED: Now targets all three placeholders */
-#termly-content-placeholder span[style*="background: url(data:image/svg+xml"],
-#privacy-content-placeholder span[style*="background: url(data:image/svg+xml"],
-#cookie-content-placeholder span[style*="background: url(data:image/svg+xml"] {
-    display: none !important;
-}
-
-#termly-content-placeholder [data-custom-class='heading_1'] *,
-#termly-content-placeholder [data-custom-class='heading_2'] *,
-#privacy-content-placeholder [data-custom-class='heading_1'] *,
-#privacy-content-placeholder [data-custom-class='heading_2'] *,
-#cookie-content-placeholder [data-custom-class='heading_1'] *,
-#cookie-content-placeholder [data-custom-class='heading_2'] * {
-    font-family: var(--font-heading) !important;
-    color: var(--primary-color) !important;
-}
-
-#termly-content-placeholder [data-custom-class='body_text'],
-#termly-content-placeholder [data-custom-class='body_text'] *,
-#privacy-content-placeholder [data-custom-class='body_text'],
-#privacy-content-placeholder [data-custom-class='body_text'] *,
-#cookie-content-placeholder [data-custom-class='body_text'],
-#cookie-content-placeholder [data-custom-class='body_text'] * {
-    font-family: var(--font-body) !important;
-    color: var(--dark-gray) !important;
-    font-size: 1rem !important;
-}
-
-#termly-content-placeholder [data-custom-class='link'],
-#termly-content-placeholder [data-custom-class='link'] *,
-#privacy-content-placeholder [data-custom-class='link'],
-#privacy-content-placeholder [data-custom-class='link'] *,
-#cookie-content-placeholder [data-custom-class='link'],
-#cookie-content-placeholder [data-custom-class='link'] * {
-    color: var(--accent-color) !important;
-    text-decoration: underline;
-}
