@@ -455,3 +455,30 @@ footer .footer-col p a {
     }
 }
 
+@media (max-width: 1095px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--white);
+        position: absolute;
+        top: 65px;
+        left: 0;
+        padding: 1rem 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        text-align: center;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    .mobile-menu-button {
+        display: block;
+    }
+}

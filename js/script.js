@@ -70,17 +70,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     const pageMetas = {
-        'home': { title: 'Meridian | Your Home Away From Home', description: 'Discover exceptional rental solutions in Dallas, TX...' },
-        'about': { title: 'About Us | Meridian', description: 'Learn about our commitment to quality, trust, and lasting relationships...' },
-        'for-businesses': { title: 'For Businesses | Meridian', description: 'Find strategic housing solutions for businesses in Dallas, TX...' },
-        'for-tenants': { title: 'For Tenants | Meridian', description: 'Find your modern rental in Dallas, TX...' },
-        'properties': { title: 'Our Properties | Meridian', description: 'Explore high-quality, modern rental properties in Dallas...' },
-        'services': { title: 'Our Services | Meridian', 'description': 'Discover dedicated support for seamless rental experiences...' },
-        'contact': { title: 'Contact Us | Meridian', description: 'Contact us today for exceptional rental solutions...' },
-        'terms': { title: 'Terms & Conditions | Meridian', description: 'Review the terms and conditions for Meridian.' },
-        'privacy': { title: 'Privacy Policy | Meridian', description: 'Review the Meridian housing privacy policy.' },
-        'cookies': { title: 'Cookie Policy | Meridian', description: 'Review the Meridian housing cookie policy.' },
-        'accessibility': { title: 'Accessibility | Meridian', description: 'Review the Meridian housing accessibility statement.' }
+        'home': { title: 'Meridian | Welcome Home', description: 'Discover quality, furnished housing in Dallas tailored for professionals, businesses, and relocations. Seamless, trusted, and ready when you are.' },
+        'about': { title: 'Meridian | About Us', description: 'With a decade of experience, Meridian is known for reliability, attention to detail, and responsive service. Learn how we support professionals with exceptional housing.' },
+        'for-businesses': { title: 'Meridian | For Businesses', description: 'Flexible, scalable housing for corporate, medical, education, and insurance sectors. Discover how Meridian supports professionals with reliable, high-quality stays.' },
+        'for-tenants': { title: 'Meridian | For Tenants', description: 'Comfortable, modern furnished homes in top Dallas neighborhoods. Seamless transitions, responsive support, and peace of mind for extended stays.' },
+        'properties': { title: 'Meridian | Our Properties', description: 'Explore renovated, furnished single-family homes in A and B class Dallas neighborhoods. Ideal for work-from-home professionals and extended stays.' },
+        'services': { title: 'Meridian | Our Services', 'description': 'From remote onboarding to responsive support, discover how Meridian delivers fast, flexible service for business and tenant needs in Dallas.' },
+        'contact': { title: 'Meridian | Contact Us', description: 'Have a question or need housing support? Call, text, or email Meridian for fast, responsive help. We typically respond within an hour.' },
+        'terms': { title: 'Meridian | Terms & Conditions', description: 'Review Meridian’s legal terms and service guidelines for rentals and housing agreements.' },
+        'privacy': { title: 'Meridian | Privacy Policy', description: 'Learn how Meridian protects your data and privacy across our rental and service platforms.' },
+        'cookies': { title: 'Meridian | Cookie Policy', description: 'Understand how cookies are used on the Meridian website to improve your browsing experience.' },
+        'accessibility': { title: 'Meridian | Accessibility', description: 'Meridian is committed to accessibility and strives to ensure all users can access our services and website.' }
     };
 
     const loadPage = async (page = 'home') => {
