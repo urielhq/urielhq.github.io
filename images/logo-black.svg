@@ -1,4 +1,4 @@
-<svg id="logo_white" data-name="logo white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6500" height="1024" viewBox="0 0 6500 1024">
+<svg id="logo_black" data-name="logo black" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6500" height="1024" viewBox="0 0 6500 1024">
   <defs>
     <style>
       .cls-1, .cls-2, .cls-3 {
@@ -12,18 +12,14 @@
       .cls-2 {
         filter: url(#filter-2);
       }
-
-      .cls-3 {
-        fill: #fff;
-      }
     </style>
     <filter id="filter" x="545.156" y="149" width="587.904" height="716.562" filterUnits="userSpaceOnUse">
-      <feFlood result="flood" flood-color="#fff"/>
+      <feFlood result="flood"/>
       <feComposite result="composite" operator="in" in2="SourceGraphic"/>
       <feBlend result="blend" in2="SourceGraphic"/>
     </filter>
     <filter id="filter-2" x="109" y="321.625" width="636.406" height="543.937" filterUnits="userSpaceOnUse">
-      <feFlood result="flood" flood-color="#fff"/>
+      <feFlood result="flood"/>
       <feComposite result="composite" operator="in" in2="SourceGraphic"/>
       <feBlend result="blend" in2="SourceGraphic"/>
     </filter>
