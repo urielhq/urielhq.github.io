@@ -87,6 +87,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (observer) {
             observer.disconnect();
         }
+		
+		// Track virtual pageview for Google Analytics
+gtag('event', 'page_view', {
+  page_location: window.location.href,
+  page_path: window.location.pathname + window.location.hash,
+  page_title: document.title
+});
         
         mainContent.classList.add('is-fading');
         footer.classList.remove('is-visible'); 
