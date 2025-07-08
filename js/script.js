@@ -111,6 +111,23 @@ gtag('event', 'page_view', {
             const content = await response.text();
             
             mainContent.innerHTML = content;
+			if (page === 'contact') {
+  const emailEl = document.getElementById("contact-email");
+  if (emailEl) {
+    const user = "contact";
+    const domain = "blackridgemgmt.com";
+    emailEl.href = `mailto:${user}@${domain}`;
+    emailEl.textContent = `${user}@${domain}`;
+    emailEl.rel = "nofollow";
+  }
+
+  const phoneEl = document.getElementById("contact-phone");
+  if (phoneEl) {
+    phoneEl.href = "tel:15127853518";
+    phoneEl.textContent = "(512) 785-3518";
+    phoneEl.rel = "nofollow";
+  }
+}
             window.scrollTo(0, 0);
 
             // --- NEW CODE BLOCK TO INJECT TERMS CONTENT ---

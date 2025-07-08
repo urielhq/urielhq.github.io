@@ -103,12 +103,24 @@
                     <a href="#services" data-page="services">Our Services</a>
                 </div>
             </div>
-            <div class="footer-col">
-                <h4>Contact Info</h4>
-                <p><a href="mailto:contact@blackridgemgmt.co">contact@blackridgemgmt.com</a></p>
-                <p><a href="tel:+15127853518">(512) 785-3518</a></p>
-                <a href="#contact" data-page="contact">Contact Form</a>
-            </div>
+<div class="footer-col">
+    <h4>Contact Info</h4>
+    <p>
+      <script>
+        const user = "contact";
+        const domain = "blackridgemgmt.com";
+        document.write(`<a href="mailto:${user}@${domain}" rel="nofollow">${user}@${domain}</a>`);
+      </script>
+    </p>
+    <p>
+      <script>
+        const phone = "(512) 785-3518";
+        document.write(`<a href="tel:15127853518" rel="nofollow">${phone}</a>`);
+      </script>
+    </p>
+    <a href="#contact" data-page="contact">Contact Form</a>
+</div>
+
             <div class="footer-col">
                 <h4>Site Terms & Policies</h4>
                 <a href="#terms" data-page="terms">Terms & Conditions</a>
@@ -120,8 +132,39 @@
             <p>&copy; 2025 BLACKRIDGE Management LLC. All Rights Reserved.</p>
             <p><a href="#accessibility" data-page="accessibility">Accessibility Statement</a></p>
         </div>
+		
+
+
     </footer>
 
     <script src="js/script.js"></script>
+	<script>
+  const emailEl = document.getElementById("contact-email");
+  if (emailEl) {
+    const user = "contact";
+    const domain = "blackridgemgmt.com";
+    emailEl.href = `mailto:${user}@${domain}`;
+    emailEl.textContent = `${user}@${domain}`;
+    emailEl.rel = "nofollow";
+  }
+
+  const phoneEl = document.getElementById("contact-phone");
+  if (phoneEl) {
+    phoneEl.href = "tel:15127853518";
+    phoneEl.textContent = "(512) 785-3518";
+    phoneEl.rel = "nofollow";
+  }
+</script>
+<script>
+  document.addEventListener("submit", function (e) {
+    const form = e.target;
+    const honeypot = form.querySelector('input[name="honeypot"]');
+    if (honeypot && honeypot.value.trim() !== "") {
+      console.warn("Bot detected via honeypot field. Submission blocked.");
+      e.preventDefault(); // Stop submission
+    }
+  });
+</script>
 </body>
 </html>
+
