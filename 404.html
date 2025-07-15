@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url=/index.html">
+  <script>
+    // Preserve the path and query string
+    const redirectTo = '/index.html' + window.location.search + window.location.hash;
+    window.location.replace(redirectTo);
+  </script>
   <title>Redirecting...</title>
-  <meta name="robots" content="noindex">
 </head>
 <body>
-  <p>Redirecting...</p>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const path = location.pathname.substring(1) || 'home';
-      history.replaceState({ page: path }, '', '/');
-      window.dispatchEvent(new PopStateEvent('popstate', { state: { page: path } }));
-    });
-  </script>
+  Redirecting...
 </body>
 </html>
