@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <script>
-    // Only redirect if not already on index.html
-    const isIndex = window.location.pathname.includes('/index.html');
-    if (!isIndex) {
-      const path = window.location.pathname + window.location.search + window.location.hash;
-      const target = '/index.html' + path;
-      window.location.replace(target);
-    }
-  </script>
   <title>Redirecting...</title>
+  <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const isAlreadyIndex = currentPath.startsWith('/index.html');
+
+      if (!isAlreadyIndex) {
+        const fullPath = window.location.pathname + window.location.search + window.location.hash;
+        const redirectTo = '/index.html' + fullPath;
+        window.location.replace(redirectTo);
+      }
+    })();
+  </script>
 </head>
 <body>
   Redirecting...
