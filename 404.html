@@ -8,10 +8,9 @@
 <body>
   <p>Redirecting...</p>
   <script>
-    const path = location.pathname.substring(1) || 'home';
-    // Wait until the main SPA script is loaded
-    window.addEventListener('DOMContentLoaded', () => {
-      history.replaceState({}, '', '/');
+    document.addEventListener('DOMContentLoaded', function () {
+      const path = location.pathname.substring(1) || 'home';
+      history.replaceState({ page: path }, '', '/');
       window.dispatchEvent(new PopStateEvent('popstate', { state: { page: path } }));
     });
   </script>
