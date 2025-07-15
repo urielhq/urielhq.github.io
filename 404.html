@@ -4,15 +4,16 @@
   <meta charset="UTF-8">
   <title>Redirecting...</title>
   <meta name="robots" content="noindex">
-  <script>
-    // Extract the path from the URL
-    const path = location.pathname.substring(1);
-    // Redirect to root and trigger SPA routing
-    history.replaceState({}, '', '/');
-    window.dispatchEvent(new PopStateEvent('popstate', { state: { page: path || 'home' } }));
-  </script>
 </head>
 <body>
   <p>Redirecting...</p>
+  <script>
+    const path = location.pathname.substring(1) || 'home';
+    // Wait until the main SPA script is loaded
+    window.addEventListener('DOMContentLoaded', () => {
+      history.replaceState({}, '', '/');
+      window.dispatchEvent(new PopStateEvent('popstate', { state: { page: path } }));
+    });
+  </script>
 </body>
 </html>
