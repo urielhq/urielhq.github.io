@@ -118,7 +118,7 @@ header .container {
 }
 
 .nav-links { display: flex; align-items: center; }
-.nav-links a { color: var(--primary-color); padding: 5px 14px; margin: 0 5px; font-weight: 700; position: relative; }
+.nav-links a { color: var(--primary-color); padding: 5px 14px; margin: 0px; font-weight: 700; position: relative; }
 .nav-links a.active::after, .nav-links a:hover::after { content: ''; position: absolute; bottom: -5px; left: 15px; right: 15px; height: 2px; background-color: var(--accent-color); }
 
 .mobile-menu-button { display: none; font-size: 2rem; background: none; border: none; color: var(--primary-color); cursor: pointer; }
@@ -458,7 +458,7 @@ footer .footer-col p a {
     }
 }
 
-@media (max-width: 1105px) {
+@media (max-width: 1065px) {
     .nav-links {
         display: none;
         flex-direction: column;
@@ -478,7 +478,9 @@ footer .footer-col p a {
     .nav-links a {
         text-align: center;
         padding: 1rem;
-        width: 100%;
+  		width: auto; /* or remove this line entirely */
+  		white-space: nowrap; /* prevents wrapping */
+
     }
 
     .mobile-menu-button {

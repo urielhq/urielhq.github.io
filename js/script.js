@@ -111,23 +111,28 @@ gtag('event', 'page_view', {
             const content = await response.text();
             
             mainContent.innerHTML = content;
-			if (page === 'contact') {
+if (page === 'contact') {
   const emailEl = document.getElementById("contact-email");
   if (emailEl) {
-    const user = "contact";
-    const domain = "blackridgemgmt.com";
-    emailEl.href = `mailto:${user}@${domain}`;
-    emailEl.textContent = `${user}@${domain}`;
+    const u = "contact";
+    const d = ["blackridge", "mgmt", "com"];
+    const e = `${u}@${d[0]}${d[1]}.${d[2]}`;
+    emailEl.href = `mailto:${e}`;
+    emailEl.textContent = e;
     emailEl.rel = "nofollow";
   }
 
   const phoneEl = document.getElementById("contact-phone");
   if (phoneEl) {
-    phoneEl.href = "tel:15127853518";
-    phoneEl.textContent = "(512) 785-3518";
+    const p = ["512", "785", "3518"];
+    const raw = p.join("");
+    const formatted = `(${p[0]}) ${p[1]}-${p[2]}`;
+    phoneEl.href = `tel:${raw}`;
+    phoneEl.textContent = formatted;
     phoneEl.rel = "nofollow";
   }
 }
+
             window.scrollTo(0, 0);
 
             // --- NEW CODE BLOCK TO INJECT TERMS CONTENT ---
