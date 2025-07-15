@@ -195,10 +195,11 @@ if (page === 'contact') {
         if (targetLink) {
             e.preventDefault();
             const page = targetLink.getAttribute('data-page');
-            if (location.hash !== `#${page}`) {
-                history.pushState({ page }, '', `#${page}`);
-                loadPage(page);
-            }
+if (location.pathname !== `/${page}`) {
+  history.pushState({ page }, '', `/${page}`);
+  loadPage(page);
+}
+
         }
     });
 
@@ -207,6 +208,6 @@ if (page === 'contact') {
         loadPage(page);
     });
 
-    const initialPage = location.hash.substring(1) || 'home';
+    const initialPage = location.pathname.substring(1) || 'home';
     loadPage(initialPage);
 });
