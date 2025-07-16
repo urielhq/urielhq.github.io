@@ -112,47 +112,48 @@ gtag('event', 'page_view', {
             mainContent.innerHTML = content;
 
 if (page === 'contact') {
-  const emailEl = document.getElementById("contact-email");
-  if (emailEl) {
-    const u = "contact";
-    const d = ["blackridge", "mgmt", "com"];
-    const e = `${u}@${d[0]}${d[1]}.${d[2]}`;
-    emailEl.href = `mailto:${e}`;
-    emailEl.textContent = e;
-    emailEl.rel = "nofollow";
-  }
+                const emailEl = document.getElementById("contact-email");
+                if (emailEl) {
+                    const u = "contact";
+                    const d = ["blackridge", "mgmt", "com"];
+                    const e = `${u}@${d[0]}${d[1]}.${d[2]}`;
+                    emailEl.href = `mailto:${e}`;
+                    emailEl.textContent = e;
+                    emailEl.rel = "nofollow";
+                }
 
-  const phoneEl = document.getElementById("contact-phone");
-  if (phoneEl) {
-    const p = ["512", "785", "3518"];
-    const raw = p.join("");
-    const formatted = `(${p[0]}) ${p[1]}-${p[2]}`;
-    phoneEl.href = `tel:${raw}`;
-    phoneEl.textContent = formatted;
-    phoneEl.rel = "nofollow";
-  }
+                const phoneEl = document.getElementById("contact-phone");
+                if (phoneEl) {
+                    const p = ["512", "785", "3518"];
+                    const raw = p.join("");
+                    const formatted = `(${p[0]}) ${p[1]}-${p[2]}`;
+                    phoneEl.href = `tel:${raw}`;
+                    phoneEl.textContent = formatted;
+                    phoneEl.rel = "nofollow";
+                }
 
-  // --- NEW RECAPTCHA RENDERING CODE ---
-  // Ensure grecaptcha is defined before trying to render
-  if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
-    // Find the div where reCAPTCHA should be rendered
-    const recaptchaDiv = document.querySelector('.g-recaptcha');
-    if (recaptchaDiv) {
-      // Check if it hasn't been rendered already (important for SPA)
-      if (!recaptchaDiv.dataset.rendered) {
-        grecaptcha.render(recaptchaDiv, {
-          'sitekey': recaptchaDiv.getAttribute('data-sitekey')
-        });
-        recaptchaDiv.dataset.rendered = 'true'; // Mark as rendered
-      }
-    } else {
-      console.warn("reCAPTCHA div not found on contact page.");
-    }
-  } else {
-    console.warn("reCAPTCHA API (grecaptcha) not yet loaded or render function not available.");
-  }
-  // --- END NEW RECAPTCHA RENDERING CODE ---
-}
+                // --- RECAPTCHA RENDERING CODE (MODIFIED FOR AUTO-SUBMISSION) ---
+                // Ensure grecaptcha is defined before trying to render
+                if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
+                    // Find the div where reCAPTCHA should be rendered
+                    const recaptchaDiv = document.querySelector('.g-recaptcha');
+                    if (recaptchaDiv) {
+                        // Check if it hasn't been rendered already (important for SPA)
+                        if (!recaptchaDiv.dataset.rendered) {
+                            grecaptcha.render(recaptchaDiv, {
+                                'sitekey': recaptchaDiv.getAttribute('data-sitekey'),
+                                'callback': window.onSubmitRecaptcha // ADD THIS LINE for auto-submission
+                            });
+                            recaptchaDiv.dataset.rendered = 'true'; // Mark as rendered
+                        }
+                    } else {
+                        console.warn("reCAPTCHA div not found on contact page.");
+                    }
+                } else {
+                    console.warn("reCAPTCHA API (grecaptcha) not yet loaded or render function not available.");
+                }
+                // --- END RECAPTCHA RENDERING CODE ---
+            }
 
 
             window.scrollTo(0, 0);

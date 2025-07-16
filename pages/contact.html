@@ -10,26 +10,21 @@
             <h2 class="text-center">Send us a Message</h2>
             
             <!-- This form now uses the default Formspree redirect -->
-<form action="https://formspree.io/f/mrbkjjvz" method="POST" autocomplete="off">
-<!-- Honeypot trap for bots -->
-<div style="position:absolute; left:-9999px;" aria-hidden="true">
-  <label for="honeypot">Leave this field empty</label>
-<input type="text" id="honeypot" name="_gotcha" autocomplete="off" tabindex="-1">
-</div>
-                <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" name="name" required></div>
-                <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" required></div>
-                <div class="form-group"><label for="client-type">I am a:</label><select id="client-type" name="client_type"><option value="business">Business Client</option><option value="tenant">Individual Tenant</option><option value="other">Other</option></select></div>
-                <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" rows="5" required></textarea></div>
-                
-<!-- reCAPTCHA widget -->
-<div class="form-group recaptcha-wrapper">
-  <div class="g-recaptcha" data-sitekey="6LdDzoQrAAAAAIV34MnQVcbArxUjcWjaqIQYvIEd"></div>
-</div>
-				
-                <button type="submit" class="btn btn-primary">Submit Inquiry</button>
-                
-                <!-- The status div is no longer needed -->
-            </form>
+<form id="contactForm" action="https://formspree.io/f/mrbkjjvz" method="POST" autocomplete="off">
+    <div style="position:absolute; left:-9999px;" aria-hidden="true">
+      <label for="honeypot">Leave this field empty</label>
+      <input type="text" id="honeypot" name="_gotcha" autocomplete="off" tabindex="-1">
+    </div>
+    <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" name="name" required></div>
+    <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" required></div>
+    <div class="form-group"><label for="client-type">I am a:</label><select id="client-type" name="client_type"><option value="business">Business Client</option><option value="tenant">Individual Tenant</option><option value="other">Other</option></select></div>
+    <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" rows="5" required></textarea></div>
+    
+    <div class="form-group recaptcha-wrapper">
+      <div class="g-recaptcha" data-sitekey="6LdDzoQrAAAAAIV34MnQVcbArxUjcWjaqIQYvIEd"></div>
+    </div>
+    
+    </form>
         </div>
         <div class="contact-info-container">
 <div class="contact-info-block">
