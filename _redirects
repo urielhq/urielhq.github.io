@@ -1,5 +1,11 @@
-/* /index.html 200
-/css/* /css/:splat 200
-/js/* /js/:splat 200
-/favicons/* /favicons/:splat 200
-/pages/* /pages/:splat 200
+/about /index.html 200
+/for-businesses /index.html 200
+/for-tenants /index.html 200
+/properties /index.html 200
+/services /index.html 200
+/contact /index.html 200
+/terms /index.html 200
+/privacy /index.html 200
+/cookies /index.html 200
+/accessibility /index.html 200
+/home /index.html 200
