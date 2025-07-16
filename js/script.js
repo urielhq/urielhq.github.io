@@ -4,14 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('contactForm'); // Get your form by its ID
         if (form) {
             form.submit(); // Submit the form programmatically
-            
+
             // Optional: Provide immediate user feedback after submission
             const recaptchaWrapper = document.querySelector('.recaptcha-wrapper');
             if (recaptchaWrapper) {
                 recaptchaWrapper.innerHTML = '<p style="text-align: center; color: green; font-weight: bold;">Message sent successfully!</p>';
             }
             // You might also want to clear form fields here or redirect the user
-            form.reset(); 
+            form.reset();
         } else {
             console.error("Contact form with ID 'contactForm' not found for reCAPTCHA submission.");
         }
@@ -27,227 +27,264 @@ document.addEventListener('DOMContentLoaded', function() {
     let lastScrollY = window.scrollY;
 
     function setupIntersectionObserver() {
-        const animatedItems = document.querySelectorAll('.fade-in');
-        
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+        // Disconnect existing observer if it exists
+        if (observer) {
+            observer.disconnect();
+        }
 
-        observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
+        observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
+                    entry.target.classList.remove('is-fading');
+                } else {
+                    // Optional: remove is-visible when out of view, if you want re-triggering or different effect
+                    // entry.target.classList.remove('is-visible');
                 }
             });
-        }, options);
+        }, { threshold: 0.1 });
 
-        animatedItems.forEach(item => {
+        document.querySelectorAll('.fade-in').forEach((item) => {
+            item.classList.add('is-fading'); // Ensure fade-in elements start faded
             observer.observe(item);
         });
     }
 
     function setupFooterObserver() {
-        const footerObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        if (footer) {
-            footerObserver.observe(footer);
+        // Disconnect previous footer observer if it exists
+        if (window.footerObserver) {
+            window.footerObserver.disconnect();
+        }
+
+        const footerElement = document.querySelector('footer');
+        if (footerElement) {
+            window.footerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        header.classList.add('hide-on-footer');
+                    } else {
+                        header.classList.remove('hide-on-footer');
+                    }
+                });
+            }, { threshold: 0.1 }); // Adjust threshold as needed
+            window.footerObserver.observe(footerElement);
         }
     }
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > lastScrollY && window.scrollY > 150) {
-            header.classList.add('header-hidden');
-        } else {
-            header.classList.remove('header-hidden');
-        }
 
-        if (window.scrollY > 10) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
 
-        lastScrollY = window.scrollY;
-    });
-
-    if (mobileMenuButton && navLinksContainer) {
-        mobileMenuButton.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('active');
-        });
-    }
-    
     const pageMetas = {
-        'home': { title: 'BLACKRIDGE | Welcome Home', description: 'Discover quality, furnished housing in Dallas tailored for professionals, businesses, and relocations. Seamless, trusted, and ready when you are.' },
-        'about': { title: 'BLACKRIDGE | About Us', description: 'With a decade of experience, BLACKRIDGE is known for reliability, attention to detail, and responsive service. Learn how we support professionals with exceptional housing.' },
-        'for-businesses': { title: 'BLACKRIDGE | For Businesses', description: 'Flexible, scalable housing for corporate, medical, education, and insurance sectors. Discover how BLACKRIDGE supports professionals with reliable, high-quality stays.' },
-        'for-tenants': { title: 'BLACKRIDGE | For Tenants', description: 'Comfortable, modern furnished homes in top Dallas neighborhoods. Seamless transitions, responsive support, and peace of mind for extended stays.' },
-        'properties': { title: 'BLACKRIDGE | Our Properties', description: 'Explore renovated, furnished single-family homes in A and B class Dallas neighborhoods. Ideal for work-from-home professionals and extended stays.' },
-        'services': { title: 'BLACKRIDGE | Our Services', 'description': 'From remote onboarding to responsive support, discover how BLACKRIDGE delivers fast, flexible service for business and tenant needs in Dallas.' },
-        'contact': { title: 'BLACKRIDGE | Contact Us', description: 'Have a question or need housing support? Call, text, or email BLACKRIDGE for fast, responsive help. We typically respond within an hour.' },
-        'terms': { title: 'BLACKRIDGE | Terms & Conditions', description: 'Review BLACKRIDGE’s legal terms and service guidelines for rentals and housing agreements.' },
-        'privacy': { title: 'BLACKRIDGE | Privacy Policy', description: 'Learn how BLACKRIDGE protects your data and privacy across our rental and service platforms.' },
-        'cookies': { title: 'BLACKRIDGE | Cookie Policy', description: 'Understand how cookies are used on the BLACKRIDGE website to improve your browsing experience.' },
-        'accessibility': { title: 'BLACKRIDGE | Accessibility', description: 'BLACKRIDGE is committed to accessibility and strives to ensure all users can access our services and website.' }
+        'home': {
+            title: 'BLACKRIDGE | Welcome Home',
+            description: 'Discover exceptional rental solutions in Dallas, TX for traveling professionals, corporate teams, and families. High-quality properties and seamless service.'
+        },
+        'about': {
+            title: 'BLACKRIDGE | About Us - Exceptional Living Solutions',
+            description: 'Learn about BLACKRIDGE Management\'s commitment to providing high-quality, comfortable, and convenient extended-stay housing in Dallas, TX.'
+        },
+        'for-businesses': {
+            title: 'BLACKRIDGE | For Businesses - Corporate Housing',
+            description: 'Streamlined corporate housing and extended-stay solutions for businesses in Dallas, TX. Flexible, comfortable, and reliable.',
+            'og:image': 'https://res.cloudinary.com/dbdcudh2u/image/upload/v1751496878/for-businesses-preview_l0g4c3.png'
+        },
+        'for-tenants': {
+            title: 'BLACKRIDGE | For Tenants - Extended Stays',
+            description: 'Find your perfect home away from home with BLACKRIDGE. Comfortable, fully-equipped properties for extended stays in Dallas, TX.',
+            'og:image': 'https://res.cloudinary.com/dbdcudh2u/image/upload/v1751496878/for-tenants-preview_f0p92g.png'
+        },
+        'properties': {
+            title: 'BLACKRIDGE | Our Properties - Dallas Extended Stays',
+            description: 'Explore high-quality, fully-furnished properties available for extended stays in prime Dallas, TX locations with BLACKRIDGE Management.'
+        },
+        'services': {
+            title: 'BLACKRIDGE | Our Services - Dedicated Support',
+            description: 'Comprehensive support services from BLACKRIDGE Management: responsive guest assistance, professional cleaning, and proactive maintenance for your peace of mind.'
+        },
+        'contact': {
+            title: 'BLACKRIDGE | Contact Us - Get In Touch',
+            description: 'Contact BLACKRIDGE Management for exceptional living solutions and extended stays in Dallas, TX. Reach out for inquiries, bookings, and support.'
+        },
+        'terms': {
+            title: 'BLACKRIDGE | Terms & Conditions',
+            description: 'Review the Terms & Conditions for BLACKRIDGE Management\'s extended stay and rental services.'
+        },
+        'privacy': {
+            title: 'BLACKRIDGE | Privacy Policy',
+            description: 'Understand BLACKRIDGE Management\'s Privacy Policy regarding data collection and usage for our extended stay services.'
+        },
+        'cookies': {
+            title: 'BLACKRIDGE | Cookie Policy',
+            description: 'Learn about the use of cookies on the BLACKRIDGE Management website in our detailed Cookie Policy.'
+        },
+        'accessibility': {
+            title: 'BLACKRIDGE | Accessibility Statement',
+            description: 'BLACKRIDGE Management\'s commitment to accessibility for all users of our website and services.'
+        }
     };
 
-    const loadPage = async (page = 'home') => {
-        if (observer) {
-            observer.disconnect();
+
+    const updateMetaTags = (pageData) => {
+        if (!pageData) return;
+
+        document.title = pageData.title || 'BLACKRIDGE | Welcome Home';
+        document.querySelector('meta[name="description"]').setAttribute('content', pageData.description || 'Discover exceptional rental solutions in Dallas, TX for traveling professionals, corporate teams, and families. High-quality properties and seamless service.');
+
+        // Update Open Graph (OG) and Twitter meta tags dynamically
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute('content', pageData.title || ogTitle.getAttribute('content'));
+        const ogDescription = document.querySelector('meta[property="og:description"]');
+        if (ogDescription) ogDescription.setAttribute('content', pageData.description || ogDescription.getAttribute('content'));
+        const ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) ogUrl.setAttribute('content', location.href); // Always update with current URL
+
+        // Update OG Image (use page-specific image if available, else default)
+        const ogImage = document.querySelector('meta[property="og:image"]');
+        if (ogImage) {
+            ogImage.setAttribute('content', pageData['og:image'] || 'https://res.cloudinary.com/dbdcudh2u/image/upload/v1751496878/preview-banner_gl73lj.png');
         }
-		
-		// Track virtual pageview for Google Analytics
-gtag('event', 'page_view', {
-  page_location: window.location.href,
-  page_path: window.location.pathname + window.location.hash,
-  page_title: document.title
-});
-        
+        // Also update twitter:image if it exists and has a specific 'src'
+        const twitterImageSrc = document.querySelector('meta[name="twitter:image:src"]');
+        if (twitterImageSrc) {
+            twitterImageSrc.setAttribute('content', pageData['og:image'] || 'https://res.cloudinary.com/dbdcudh2u/image/upload/v1751496878/preview-banner_gl73lj.png');
+        }
+    };
+
+    const loadPage = async (pageName) => {
         mainContent.classList.add('is-fading');
-        footer.classList.remove('is-visible'); 
-        await new Promise(resolve => setTimeout(resolve, 200));
-
-        navLinksContainer.classList.remove('active');
-        navLinks.forEach(link => link.classList.remove('active'));
-
-        const activeLink = document.querySelector(`.nav-links a[data-page="${page}"]`);
-        if (activeLink) activeLink.classList.add('active');
+        const pagePath = `pages/${pageName}.html`; // This is the internal path to fetch
 
         try {
-            const response = await fetch(`pages/${page}.html`);
-            if (!response.ok) throw new Error('Page not found');
+            const response = await fetch(pagePath);
+            if (!response.ok) {
+                if (response.status === 404) {
+                    throw new Error('Page not found');
+                }
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const content = await response.text();
-            
             mainContent.innerHTML = content;
 
-if (page === 'contact') {
-                const emailEl = document.getElementById("contact-email");
-                if (emailEl) {
-                    const u = "contact";
-                    const d = ["blackridge", "mgmt", "com"];
-                    const e = `${u}@${d[0]}${d[1]}.${d[2]}`;
-                    emailEl.href = `mailto:${e}`;
-                    emailEl.textContent = e;
-                    emailEl.rel = "nofollow";
+            // Handle specific styles for the home page hero
+            const existingHomeHeroStyle = document.getElementById('home-hero-style');
+            if (pageName === 'home') {
+                if (!existingHomeHeroStyle) {
+                    const homeHeroStyle = document.createElement('style');
+                    homeHeroStyle.id = 'home-hero-style'; // Give it an ID to find later
+                    homeHeroStyle.textContent = ".hero { background-image: linear-gradient(rgba(26, 42, 77, 0.6), rgba(26, 42, 77, 0.6)), url('/images/hero-home.jpg'); }";
+                    document.head.appendChild(homeHeroStyle);
                 }
-
-                const phoneEl = document.getElementById("contact-phone");
-                if (phoneEl) {
-                    const p = ["512", "785", "3518"];
-                    const raw = p.join("");
-                    const formatted = `(${p[0]}) ${p[1]}-${p[2]}`;
-                    phoneEl.href = `tel:${raw}`;
-                    phoneEl.textContent = formatted;
-                    phoneEl.rel = "nofollow";
-                }
-
-                // --- RECAPTCHA RENDERING CODE (MODIFIED FOR AUTO-SUBMISSION) ---
-                // Ensure grecaptcha is defined before trying to render
-                if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
-                    // Find the div where reCAPTCHA should be rendered
-                    const recaptchaDiv = document.querySelector('.g-recaptcha');
-                    if (recaptchaDiv) {
-                        // Check if it hasn't been rendered already (important for SPA)
-                        if (!recaptchaDiv.dataset.rendered) {
-                            grecaptcha.render(recaptchaDiv, {
-                                'sitekey': recaptchaDiv.getAttribute('data-sitekey'),
-                                'callback': window.onSubmitRecaptcha // ADD THIS LINE for auto-submission
-                            });
-                            recaptchaDiv.dataset.rendered = 'true'; // Mark as rendered
-                        }
-                    } else {
-                        console.warn("reCAPTCHA div not found on contact page.");
-                    }
-                } else {
-                    console.warn("reCAPTCHA API (grecaptcha) not yet loaded or render function not available.");
-                }
-                // --- END RECAPTCHA RENDERING CODE ---
-            }
-
-
-            window.scrollTo(0, 0);
-
-            // --- NEW CODE BLOCK TO INJECT TERMS CONTENT ---
-            if (page === 'terms') {
-                const placeholder = document.getElementById('terms-content-placeholder');
-                if (placeholder) {
-                    fetch('pages/terms-content.html') // <<< FIXED
-                        .then(res => res.text())
-                        .then(html => {
-                            placeholder.innerHTML = html;
-                        });
+            } else {
+                if (existingHomeHeroStyle) {
+                    existingHomeHeroStyle.remove();
                 }
             }
-            // --- END OF NEW CODE BLOCK ---
-                        // --- NEW CODE BLOCK TO INJECT COOKIE CONTENT ---
-            if (page === 'cookies') {
-                const placeholder = document.getElementById('cookie-content-placeholder');
-                if (placeholder) {
-                    fetch('pages/cookie-content.html') // <<< FIXED
-                        .then(res => res.text())
-                        .then(html => {
-                            placeholder.innerHTML = html;
-                        });
-                }
-            }
-            // --- END OF NEW CODE BLOCK ---
-                        // --- NEW CODE BLOCK TO INJECT PRIVACY CONTENT ---
-            if (page === 'privacy') {
-                const placeholder = document.getElementById('privacy-content-placeholder');
-                if (placeholder) {
-                    fetch('pages/privacy-content.html') // <<< FIXED
-                        .then(res => res.text())
-                        .then(html => {
-                            placeholder.innerHTML = html;
-                        });
-                }
-            }
-            // --- END OF NEW CODE BLOCK ---
 
-            if (pageMetas[page]) {
-                document.title = pageMetas[page].title;
-                document.querySelector('meta[name="description"]').setAttribute('content', pageMetas[page].description);
-            }
-            
+            updateMetaTags(pageMetas[pageName]); // Update meta tags with page-specific data
+
+            // Re-run setup functions for newly loaded content
             setupIntersectionObserver();
-            setupFooterObserver(); 
+            setupFooterObserver();
             mainContent.classList.remove('is-fading');
 
         } catch (error) {
+            // Display a generic "Page Not Found" if content loading fails
             mainContent.innerHTML = `<section class="page-header text-center fade-in"><div class="container"><h1>Page Not Found</h1><p>The content you're looking for doesn't exist.</p></div></section>`;
             mainContent.classList.remove('is-fading');
-            setupIntersectionObserver();
+            setupIntersectionObserver(); // Ensure error message also fades in
             setupFooterObserver();
             console.error('Error loading page:', error);
         }
     };
-    
+
+    // Helper to get the canonical page name from a URL path
+    const getPageNameFromPath = (path) => {
+        let page = 'home'; // Default
+
+        if (path.startsWith('/')) {
+            path = path.substring(1); // Remove leading slash
+        }
+
+        if (path.startsWith('pages/')) {
+            // If path is like "pages/services.html"
+            const filename = path.split('/').pop(); // Gets "services.html"
+            page = filename.replace('.html', ''); // Gets "services"
+        } else if (path) {
+            // For paths like "services", "about", etc.
+            page = path;
+        }
+        return page;
+    };
+
+    // Initial page load based on current URL
+    const initialPageFromUrl = getPageNameFromPath(location.pathname);
+    loadPage(initialPageFromUrl);
+
+
     document.body.addEventListener('click', (e) => {
         const targetLink = e.target.closest('a[data-page]');
         if (targetLink) {
-            e.preventDefault();
-            const page = targetLink.getAttribute('data-page');
-if (location.pathname !== `/${page}`) {
-  history.pushState({ page }, '', `/${page}`);
-  loadPage(page);
-}
+            e.preventDefault(); // Prevent default link behavior
 
+            const page = targetLink.getAttribute('data-page'); // Get page name from data-page attribute
+            const newPath = `/${page}`;
+
+            // Only push state and load page if the URL is actually changing
+            if (location.pathname !== newPath) {
+                history.pushState({ page }, '', newPath); // Update browser URL
+                loadPage(page); // Load the new page content
+            }
         }
     });
 
     window.addEventListener('popstate', (e) => {
-        const page = (e.state && e.state.page) || 'home';
-        loadPage(page);
+        // When browser back/forward buttons are used
+        const pageFromState = e.state && e.state.page;
+        if (pageFromState) {
+            // If popstate provides a page (from pushState), use it
+            loadPage(pageFromState);
+        } else {
+            // Fallback for direct URL entry or if state is null (e.g., initial load after refresh)
+            const currentPageFromUrl = getPageNameFromPath(location.pathname);
+            loadPage(currentPageFromUrl);
+        }
     });
 
-    const initialPage = location.pathname.substring(1) || 'home';
-    loadPage(initialPage);
+    // Mobile menu toggle
+    mobileMenuButton.addEventListener('click', () => {
+        navLinksContainer.classList.toggle('active');
+        mobileMenuButton.classList.toggle('active');
+    });
+
+    // Close mobile menu when a nav link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinksContainer.classList.contains('active')) {
+                navLinksContainer.classList.remove('active');
+                mobileMenuButton.classList.remove('active');
+            }
+        });
+    });
+
+    // Close mobile menu if clicked outside
+    document.addEventListener('click', (e) => {
+        if (!navLinksContainer.contains(e.target) && !mobileMenuButton.contains(e.target) && navLinksContainer.classList.contains('active')) {
+            navLinksContainer.classList.remove('active');
+            mobileMenuButton.classList.remove('active');
+        }
+    });
+
+
+    // Hide header on scroll down, show on scroll up
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY > lastScrollY && currentScrollY > header.offsetHeight) {
+            // Scrolling down and past header height
+            header.classList.add('hide-header');
+        } else if (currentScrollY < lastScrollY) {
+            // Scrolling up
+            header.classList.remove('hide-header');
+        }
+        lastScrollY = currentScrollY;
+    });
+
 });
