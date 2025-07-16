@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
             footerObserver.observe(footer);
         }
     }
-
     window.addEventListener('scroll', () => {
         if (window.scrollY > lastScrollY && window.scrollY > 150) {
             header.classList.add('header-hidden');
@@ -111,6 +110,7 @@ gtag('event', 'page_view', {
             const content = await response.text();
             
             mainContent.innerHTML = content;
+
 if (page === 'contact') {
   const emailEl = document.getElementById("contact-email");
   if (emailEl) {
@@ -131,7 +131,29 @@ if (page === 'contact') {
     phoneEl.textContent = formatted;
     phoneEl.rel = "nofollow";
   }
+
+  // --- NEW RECAPTCHA RENDERING CODE ---
+  // Ensure grecaptcha is defined before trying to render
+  if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
+    // Find the div where reCAPTCHA should be rendered
+    const recaptchaDiv = document.querySelector('.g-recaptcha');
+    if (recaptchaDiv) {
+      // Check if it hasn't been rendered already (important for SPA)
+      if (!recaptchaDiv.dataset.rendered) {
+        grecaptcha.render(recaptchaDiv, {
+          'sitekey': recaptchaDiv.getAttribute('data-sitekey')
+        });
+        recaptchaDiv.dataset.rendered = 'true'; // Mark as rendered
+      }
+    } else {
+      console.warn("reCAPTCHA div not found on contact page.");
+    }
+  } else {
+    console.warn("reCAPTCHA API (grecaptcha) not yet loaded or render function not available.");
+  }
+  // --- END NEW RECAPTCHA RENDERING CODE ---
 }
+
 
             window.scrollTo(0, 0);
 
