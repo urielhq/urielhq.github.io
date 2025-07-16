@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
+	// Define this function globally so reCAPTCHA can call it
+    window.onSubmitRecaptcha = function() {
+        const form = document.getElementById('contactForm'); // Get your form by its ID
+        if (form) {
+            form.submit(); // Submit the form programmatically
+            
+            // Optional: Provide immediate user feedback after submission
+            const recaptchaWrapper = document.querySelector('.recaptcha-wrapper');
+            if (recaptchaWrapper) {
+                recaptchaWrapper.innerHTML = '<p style="text-align: center; color: green; font-weight: bold;">Message sent successfully!</p>';
+            }
+            // You might also want to clear form fields here or redirect the user
+            form.reset(); 
+        } else {
+            console.error("Contact form with ID 'contactForm' not found for reCAPTCHA submission.");
+        }
+    };
     const mainContent = document.getElementById('main-content');
     const header = document.querySelector('header');
     const footer = document.querySelector('footer');
